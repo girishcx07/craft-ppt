@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import { Card, CardContent } from "@workspace/ui/components/card";
 import { PropsWithChildren } from "react";
 
@@ -13,8 +12,8 @@ export const AnimatedCard = ({ children }: PropsWithChildren) => {
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <Card className="border-muted group-hover:border-primary rounded border-2 border-dashed bg-white transition-colors duration-300">
-        <CardContent className="flex min-h-44 flex-col items-center justify-center gap-3">
+      <Card className="border-muted group-hover:border-primary rounded border-2 border-dashed bg-card transition-colors duration-300 w-[200px] h-[260px] p-0 overflow-hidden">
+        <CardContent className="p-0 h-full w-full">
           {children}
         </CardContent>
       </Card>
