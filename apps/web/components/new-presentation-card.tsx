@@ -16,7 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@workspace/ui/components/dialog";
 
 import {
@@ -29,29 +29,28 @@ import {
   FormMessage,
 } from "@workspace/ui/components/form";
 
-import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
+import { slugify } from "@/lib/utils";
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Presentation name must be at least 2 characters.",
-  }),
-});
+import { Input } from "@workspace/ui/components/input";
+import { Button } from "@workspace/ui/components/button";
+import { presentationSchema } from "@/lib/validators/schema";
+
 
 export const NewPresentationCard = () => {
   const [openNewPPT, setOpenNewPPT] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof presentationSchema>>({
+    resolver: zodResolver(presentationSchema),
     defaultValues: {
       name: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof presentationSchema>) {
     console.log(values);
-    setOpenNewPPT(false)
-    redirect("/dashboard/1234")
+    setOpenNewPPT(false);
+    const slug = slugify(values.name || "");
+    redirect(`/dashboard/${slug}`);
   }
 
   return (
