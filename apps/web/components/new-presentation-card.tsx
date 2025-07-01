@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import { redirect } from "next/navigation";
+
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,8 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTitle
 } from "@workspace/ui/components/dialog";
 
 import {
@@ -27,9 +29,8 @@ import {
   FormMessage,
 } from "@workspace/ui/components/form";
 
-import { Input } from "@workspace/ui/components/input";
 import { Button } from "@workspace/ui/components/button";
-import { useState } from "react";
+import { Input } from "@workspace/ui/components/input";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -50,6 +51,7 @@ export const NewPresentationCard = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     setOpenNewPPT(false)
+    redirect("/dashboard/1234")
   }
 
   return (
