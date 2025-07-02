@@ -11,7 +11,6 @@ import {
     SidebarMenuItem,
 } from "@workspace/ui/components/sidebar"
 
-// Menu items.
 const items = [
   {
     title: "Dashboard",
@@ -42,14 +41,14 @@ const items = [
 
 export function PPTAppSidebar() {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" variant="sidebar">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem  key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />
