@@ -23,7 +23,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <div className="flex h-[calc(100vh-68px)] gap-3 overflow-hidden p-2">
-      <ResizablePanelGroup direction="horizontal" className="gap-1">
+      {/* <ResizablePanelGroup direction="horizontal" className="gap-1">
         <ResizablePanel minSize={30}>
           <Card className="h-full w-full border">
             <CardContent>
@@ -43,11 +43,12 @@ const Page = async ({ params }: PageProps) => {
             </CardContent>
           </Card>
         </ResizablePanel>
-      </ResizablePanelGroup>
+      </ResizablePanelGroup> */}
       <Card className="h-full max-w-xs p-0">
         <CardContent className="h-full overflow-hidden p-0">
           <ScrollArea className="h-[calc(100vh-68px)] w-full pb-6" type="scroll">
             <StaggeredGrid className="flex flex-col gap-4 p-3">
+              {/* <AddNewCard />   */}
               {Array.from({ length: 5 }).map((_, idx) => (
                 <PresentationPreviewCard data={idx} key={idx} />
               ))}

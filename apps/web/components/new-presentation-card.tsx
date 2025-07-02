@@ -34,7 +34,7 @@ import { slugify } from "@/lib/utils";
 import { Input } from "@workspace/ui/components/input";
 import { Button } from "@workspace/ui/components/button";
 import { presentationSchema } from "@/lib/validators/schema";
-
+import { AddNewCard } from "./add-new-card";
 
 export const NewPresentationCard = () => {
   const [openNewPPT, setOpenNewPPT] = useState(false);
@@ -50,20 +50,13 @@ export const NewPresentationCard = () => {
     console.log(values);
     setOpenNewPPT(false);
     const slug = slugify(values.name || "");
-    redirect(`/dashboard/${slug}`);
+    redirect(`/ppt/editor/${slug}`);
   }
 
   return (
     <>
       <Dialog open={openNewPPT} onOpenChange={setOpenNewPPT}>
-        <AnimatedCard>
-          <div
-            onClick={() => setOpenNewPPT(true)}
-            className="text-muted-foreground group-hover:text-primary flex h-full w-full items-center justify-center transition-colors duration-300"
-          >
-            <PlusIcon size={32} strokeWidth={2.5} />
-          </div>
-        </AnimatedCard>
+        <AddNewCard onClick={() => setOpenNewPPT(true)} />
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Create New Presentation</DialogTitle>
