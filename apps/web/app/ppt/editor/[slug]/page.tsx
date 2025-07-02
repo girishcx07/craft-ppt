@@ -44,18 +44,17 @@ const Page = async ({ params }: PageProps) => {
           </Card>
         </ResizablePanel>
       </ResizablePanelGroup> */}
-      <Card className="h-full max-w-xs p-0">
+      {/* <Card className="h-full max-w-xs p-0">
         <CardContent className="h-full overflow-hidden p-0">
           <ScrollArea className="h-[calc(100vh-68px)] w-full pb-6" type="scroll">
             <StaggeredGrid className="flex flex-col gap-4 p-3">
-              {/* <AddNewCard />   */}
               {Array.from({ length: 5 }).map((_, idx) => (
                 <PresentationPreviewCard data={idx} key={idx} />
               ))}
             </StaggeredGrid>
           </ScrollArea>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 };

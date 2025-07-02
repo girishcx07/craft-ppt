@@ -1,67 +1,56 @@
-import { Calendar, Inbox, LayoutDashboard, Search, Settings } from "lucide-react"
+"use client";
 
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-} from "@workspace/ui/components/sidebar"
+import { useState } from "react";
 
-// Menu items.
+import { Calendar, Inbox, LayoutDashboard, Search, Settings } from "lucide-react";
+
+import { Tooltip, TooltipContent, TooltipTrigger } from "@workspace/ui/components/tooltip";
+
 const items = [
   {
     title: "Dashboard",
-    url: "#",
     icon: LayoutDashboard,
   },
   {
     title: "Inbox",
-    url: "#",
     icon: Inbox,
   },
   {
     title: "Calendar",
-    url: "#",
     icon: Calendar,
   },
   {
     title: "Search",
-    url: "#",
     icon: Search,
   },
   {
     title: "Settings",
-    url: "#",
     icon: Settings,
   },
-]
+];
 
-export function PPTSidebar() {
+export const PPTSidebar = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <Sidebar collapsible="icon">
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  )
-}
+    <>
+      <div className="bg-sidebar h-full p-2 space-y-1 ">
+        {items.map(({ icon: Icon, ...item }, i) => (
+          <div className="hover:bg-sidebar-accent rounded" key={i}>
+            <Tooltip delayDuration={1000}>
+              <TooltipTrigger>
+                <div className="flex items-center gap-2 p-2">
+                  <span>
+                    <Icon className="size-4" />
+                  </span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>{item.title}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};

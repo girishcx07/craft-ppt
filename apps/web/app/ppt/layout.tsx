@@ -1,3 +1,4 @@
+import { PPTAppSidebar } from "@/components/ppt-app-sidebar";
 import { PPTSidebar } from "@/components/ppt-sidebar";
 import { PPTEditorProvider } from "@/context/ppt-editor-context";
 import { SidebarProvider, SidebarTrigger } from "@workspace/ui/components/sidebar";
@@ -16,9 +17,10 @@ export default async function EditorLayout({
   return (
     <PPTEditorProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
-        <PPTSidebar />
+        <PPTAppSidebar />
+        <SidebarTrigger />
         <main>
-          <SidebarTrigger />
+          <PPTSidebar />
           {children}
         </main>
       </SidebarProvider>
