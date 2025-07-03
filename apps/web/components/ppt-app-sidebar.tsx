@@ -55,7 +55,7 @@ export function PPTAppSidebar() {
     <Sidebar variant="floating" collapsible="icon">
       <SidebarContent>
         <SidebarGroupLabel>Application</SidebarGroupLabel>
-        <SidebarGroup className="h-full w-full flex-row gap-1">
+        <SidebarGroup className="relative h-full w-full flex-row gap-1">
           <SidebarGroupContent className="w-min">
             <SidebarMenu>
               {items.map((item) => (
@@ -74,22 +74,37 @@ export function PPTAppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-          <SideBarCard open={open && hoveredMenu} setOpen={(value) => setOpen(value)} />
+          <FloatingPanel
+            open={open}
+            setOpen={(value) => setOpen(value)}
+            hovered={hoveredMenu}
+            setHovered={(value) => setHoveredMenu(value)}
+          />
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
 }
 
-export const SideBarCard = ({
+export const FloatingPanel = ({
   open,
   setOpen,
+  hovered,
+  setHovered,
 }: {
   open: boolean;
+  hovered: boolean;
+  setHovered: ((value: boolean) => void) | undefined;
   setOpen: ((value: boolean) => void) | undefined;
 }) => {
   return (
-    <Card className={cn("h-full py-1", open ? "visible w-full" : "w-0 opacity-0")}>
+    <Card
+      className={cn(
+        "h-full py-1",
+        open || hovered ? "visible w-full" : "w-0 opacity-0",
+        hovered && !open && "absolute z-10 min-w-32"
+      )}
+    >
       <CardContent className="p-2">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas exercitationem maiores
         eligendi id ipsum! Facilis voluptas velit quibusdam vitae rem. Cupiditate esse quae impedit
