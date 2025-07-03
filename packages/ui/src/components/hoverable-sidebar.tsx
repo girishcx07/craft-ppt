@@ -294,7 +294,7 @@ function HoverableSidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useHoverableSidebar()
+  const { toggleSidebar } = useHoverableSidebar();
 
   return (
     <Button
@@ -304,15 +304,117 @@ function HoverableSidebarTrigger({
       size="icon"
       className={cn("size-7", className)}
       onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
+        onClick?.(event);
+        toggleSidebar();
       }}
       {...props}
     >
       <PanelLeftIcon />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
-  )
+  );
+}
+
+function HoverableSidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-group"
+      data-sidebar="group"
+      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarGroupLabel({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "div";
+
+  return (
+    <Comp
+      data-slot="sidebar-group-label"
+      data-sidebar="group-label"
+      className={cn(
+        "text-sidebar-foreground/70 ring-sidebar-ring outline-hidden flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarGroupAction({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "button";
+
+  return (
+    <Comp
+      data-slot="sidebar-group-action"
+      data-sidebar="group-action"
+      className={cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground outline-hidden absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
+        "after:absolute after:-inset-2 md:after:hidden",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarGroupContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-group-content"
+      data-sidebar="group-content"
+      className={cn("w-full text-sm", className)}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
+  return (
+    <ul
+      data-slot="sidebar-menu"
+      data-sidebar="menu"
+      className={cn("flex w-full min-w-0 flex-col gap-1", className)}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
+  return (
+    <li
+      data-slot="sidebar-menu-item"
+      data-sidebar="menu-item"
+      className={cn("group/menu-item relative", className)}
+      {...props}
+    />
+  );
+}
+
+function HoverableSidebarContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-content"
+      data-sidebar="content"
+      className={cn(
+        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+        className
+      )}
+      {...props}
+    />
+  );
 }
 
 export {
@@ -320,5 +422,11 @@ export {
   HoverableSidebarProvider,
   HoverableSidebarMenuButton,
   useHoverableSidebar,
-  HoverableSidebarTrigger
+  HoverableSidebarTrigger,
+  HoverableSidebarGroup,
+  HoverableSidebarGroupLabel,
+  HoverableSidebarGroupContent,
+  HoverableSidebarMenu,
+  HoverableSidebarMenuItem,
+  HoverableSidebarContent,
 };

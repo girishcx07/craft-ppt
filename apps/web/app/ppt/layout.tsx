@@ -1,9 +1,10 @@
+import { PPTAppSidebar } from "@/components/ppt-app-sidebar";
 import { PPTEditorProvider } from "@/context/ppt-editor-context";
 import {
-  HoverableSidebar,
-  HoverableSidebarProvider,
-  HoverableSidebarTrigger,
-} from "@workspace/ui/components/hoverable-sidebar";
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@workspace/ui/components/sidebar";
 import { cookies } from "next/headers";
 
 export default async function EditorLayout({
@@ -18,17 +19,13 @@ export default async function EditorLayout({
   const defaultOpen = cookieStore.get("hoverable_sidebar_state")?.value === "true";
   return (
     <PPTEditorProvider>
-      <HoverableSidebarProvider defaultOpen={false}>
-          <HoverableSidebar variant="floating" collapsible="icon">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti minus natus
-            temporibus illo explicabo rerum ratione ex! Ex eos ullam velit ipsum, libero fuga iure,
-            perferendis voluptatibus, nesciunt molestias voluptatum.
-          </HoverableSidebar>
-        <HoverableSidebarTrigger />
+      <SidebarProvider defaultOpen={false}>
+          <PPTAppSidebar />
+        <SidebarTrigger />
         <main>
           {children}
         </main>
-      </HoverableSidebarProvider>
+      </SidebarProvider>
     </PPTEditorProvider>
   );
 }
