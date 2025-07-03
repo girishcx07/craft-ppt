@@ -74,29 +74,15 @@ export function PPTAppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-          <FloatingPanel
-            open={open}
-            setOpen={(value) => setOpen(value)}
-            hovered={hoveredMenu}
-            setHovered={(value) => setHoveredMenu(value)}
-          />
+          <FloatingPanel open={open} hovered={hoveredMenu} />
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
 }
 
-export const FloatingPanel = ({
-  open,
-  setOpen,
-  hovered,
-  setHovered,
-}: {
-  open: boolean;
-  hovered: boolean;
-  setHovered: ((value: boolean) => void) | undefined;
-  setOpen: ((value: boolean) => void) | undefined;
-}) => {
+
+export const FloatingPanel = ({ open, hovered }: { open: boolean; hovered: boolean }) => {
   return (
     <Card
       className={cn(
