@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -12,20 +12,20 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavMain } from "@workspace/ui/components/nav-main"
-import { NavSidebarWrapper } from "@workspace/ui/components/nav-sidebar"
-import { NavProjects } from "@workspace/ui/components/nav-projects"
-import { NavUser } from "@workspace/ui/components/nav-user"
-import { TeamSwitcher } from "@workspace/ui/components/team-switcher"
+import { NavMain } from "@workspace/ui/components/nav-main";
+import { NavSidebarWrapper } from "@workspace/ui/components/nav-sidebar";
+import { NavProjects } from "@workspace/ui/components/nav-projects";
+import { NavUser } from "@workspace/ui/components/nav-user";
+import { TeamSwitcher } from "@workspace/ui/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@workspace/ui/components/sidebar"
+} from "@workspace/ui/components/sidebar";
 
 // This is sample data.
 const data = {
@@ -155,7 +155,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -164,8 +164,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavSidebarWrapper items={data.navMain} >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit facilis eaque dolore cumque architecto dolores? Aliquam odit, expedita consequuntur totam sit rerum incidunt perspiciatis sapiente! Ipsum animi ex voluptatum nulla?
+        <NavSidebarWrapper items={data.navMain}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit facilis eaque dolore
+          cumque architecto dolores? Aliquam odit, expedita consequuntur totam sit rerum incidunt
+          perspiciatis sapiente! Ipsum animi ex voluptatum nulla?
         </NavSidebarWrapper>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
@@ -175,5 +177,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

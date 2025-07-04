@@ -20,6 +20,17 @@ function DropdownMenuPortal({
   )
 }
 
+function DropdownMenuArrow({
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Arrow>) {
+  return (
+    <DropdownMenuPrimitive.Arrow
+      data-slot="dropdown-menu-arrow"
+      {...props}
+    />
+  )
+}
+
 function DropdownMenuTrigger({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
@@ -242,6 +253,7 @@ export {
   DropdownMenu,
   DropdownMenuPortal,
   DropdownMenuTrigger,
+  DropdownMenuArrow,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,

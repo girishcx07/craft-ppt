@@ -1,16 +1,8 @@
 import { notFound } from "next/navigation";
 
-import {
-  PageResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@workspace/ui/components/resizable";
 
-import { Card, CardContent } from "@workspace/ui/components/card";
 
-import { PresentationPreviewCard } from "@/components/presentation-preview-card";
-import { StaggeredGrid } from "@/components/stagger-grid";
-import { ScrollArea } from "@workspace/ui/components/scroll-area";
+import { Editor } from "@/components/remotion-editor";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -23,6 +15,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <div className="flex h-[calc(100vh-68px)] gap-3 overflow-hidden p-2">
+      <Editor />
       {/* <ResizablePanelGroup direction="horizontal" className="gap-1">
         <ResizablePanel minSize={30}>
           <Card className="h-full w-full border">

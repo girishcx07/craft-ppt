@@ -1,12 +1,5 @@
-import { PPTAppSidebar } from "@/components/ppt-app-sidebar";
-import { PPTEditorProvider } from "@/context/ppt-editor-context";
 import { AppSidebar } from "@workspace/ui/components/app-sidebar";
-import {
-  Sidebar,
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@workspace/ui/components/sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@workspace/ui/components/sidebar";
 import { cookies } from "next/headers";
 
 export default async function EditorLayout({
@@ -18,14 +11,14 @@ export default async function EditorLayout({
 }) {
   // const resolvedParams = await params;
   const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("hoverable_sidebar_state")?.value === "true";
+  const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <SidebarTrigger />
+    // <SidebarProvider>
+    //   <AppSidebar />
+    //   <SidebarInset>
+    //     <SidebarTrigger />
         <main>{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+    //   </SidebarInset>
+    // </SidebarProvider>
   );
 }

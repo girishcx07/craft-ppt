@@ -3,22 +3,20 @@
 import { type LucideIcon } from "lucide-react";
 
 import {
+  DropdownMenu,
+  DropdownMenuArrow,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@workspace/ui/components/dropdown-menu";
+import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from "@workspace/ui/components/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@workspace/ui/components/dropdown-menu";
 import { cn } from "@workspace/ui/lib/utils";
 
 type NavItem = {
@@ -42,7 +40,7 @@ export function NavSidebarWrapper({
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Edit Content</SidebarGroupLabel>
-      <SidebarGroupContent className="flex">
+      <SidebarGroupContent className="flex gap-1">
         <NavSidebarMenu items={items}>{children}</NavSidebarMenu>
         <NavSidebarMenuContent>{children}</NavSidebarMenuContent>
       </SidebarGroupContent>
@@ -58,11 +56,9 @@ function NavSidebarMenu({ items, children }: React.PropsWithChildren & { items: 
     <SidebarMenu className="max-w-min">
       {items.map((item) =>
         isExpanded ? (
-          <SidebarMenuItem key={item.title}>
-            <NavSidebarTriggerButton tooltip={item.title}>
-              {item.icon && <item.icon />}
-            </NavSidebarTriggerButton>
-          </SidebarMenuItem>
+          <NavSidebarTriggerButton tooltip={item.title} key={item.title}>
+            {item.icon && <item.icon />}
+          </NavSidebarTriggerButton>
         ) : (
           <DropdownMenu key={item.title} defaultOpen={item.isActive}>
             <SidebarMenuItem>
@@ -70,10 +66,11 @@ function NavSidebarMenu({ items, children }: React.PropsWithChildren & { items: 
                 {item.icon && <item.icon />}
               </NavSidebarTriggerButton>
               <DropdownMenuContent
-                className="h-full w-48 rounded-lg"
+                className="bg-accent h-[80vh] w-72 rounded-lg"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
+                <DropdownMenuArrow className="fill-accent border-accent" />
                 {children}
               </DropdownMenuContent>
             </SidebarMenuItem>
@@ -93,10 +90,10 @@ function NavSidebarMenuContent({ className, ...props }: React.ComponentProps<"di
       data-slot="nav-sidebar-menu-content"
       data-sidebar="nav-sidebar-content"
       className={cn(
-        "h-full min-w-40 max-w-xs overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 ease-in-out",
+        "bg-accent h-full overflow-hidden rounded-xl p-1 shadow-md transition-all duration-300 ease-in-out",
         show
-          ? "translate-x-0 scale-100 opacity-100 relative"
-          : "pointer-events-none absolute left-0 min-w-0 translate-x-4 scale-95 opacity-0",
+          ? "relative min-w-40 max-w-xs translate-x-0 scale-100 opacity-100" // Moved width props here
+          : "pointer-events-none absolute left-0 hidden w-0 translate-x-4 scale-95 opacity-0", // Changed min-w-0 to w-0
         className
       )}
       {...props}
