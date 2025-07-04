@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@workspace/ui/components/nav-main"
+import { NavSidebarWrapper } from "@workspace/ui/components/nav-sidebar"
 import { NavProjects } from "@workspace/ui/components/nav-projects"
 import { NavUser } from "@workspace/ui/components/nav-user"
 import { TeamSwitcher } from "@workspace/ui/components/team-switcher"
@@ -163,6 +164,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
+        <NavSidebarWrapper items={data.navMain} >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit facilis eaque dolore cumque architecto dolores? Aliquam odit, expedita consequuntur totam sit rerum incidunt perspiciatis sapiente! Ipsum animi ex voluptatum nulla?
+        </NavSidebarWrapper>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
