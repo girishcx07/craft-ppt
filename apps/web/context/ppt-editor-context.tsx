@@ -1,48 +1,56 @@
-
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
 
-type Slide = {
+export type TimelineItem = {
   id: string;
-  content: string;
+  name: string;
+  start: number;
+  duration: number;
+  content: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
-type PPTEditorContextType = {
-  slides: Slide[];
-  currentSlideId: string | null;
-  addSlide: () => void;
-  selectSlide: (id: string) => void;
+export type Track = {
+  id: string;
+  name: string;
+  items: TimelineItem[];
 };
 
-const PPTEditorContext = createContext<PPTEditorContextType | null>(null);
+type EditorContextType = {
+  tracks: Track[];
+  currentFrame: number;
+  addTrack: (track: Track) => void;
+  addItem: (trackId: string, item: TimelineItem) => void;
+  setCurrentFrame: (frame: number) => void;
+};
 
-export const PPTEditorProvider = ({ children }: { children: React.ReactNode }) => {
-  const [slides, setSlides] = useState<Slide[]>([]);
-  const [currentSlideId, setCurrentSlideId] = useState<string | null>(null);
+const EditorContext = createContext<EditorContextType | null>(null);
 
-  const addSlide = () => {
-    const newSlide: Slide = {
-      id: crypto.randomUUID(),
-      content: "",
-    };
-    setSlides((prev) => [...prev, newSlide]);
-    setCurrentSlideId(newSlide.id);
-  };
+export const useEditor = () => {
+  const ctx = useContext(EditorContext);
+  if (!ctx) throw new Error("useEditor must be used within EditorProvider");
+  return ctx;
+};
 
-  const selectSlide = (id: string) => {
-    setCurrentSlideId(id);
-  };
+export const EditorProvider = ({ children }: { children: React.ReactNode }) => {
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [currentFrame, setCurrentFrame] = useState(0);
+
+  const addTrack = (track: Track) => setTracks((t) => [...t, track]);
+
+  const addItem = (trackId: string, item: TimelineItem) =>
+    setTracks((prev) =>
+      prev.map((t) =>
+        t.id === trackId ? { ...t, items: [...t.items, item] } : t
+      )
+    );
 
   return (
-    <PPTEditorContext.Provider value={{ slides, currentSlideId, addSlide, selectSlide }}>
+    <EditorContext.Provider
+      value={{ tracks, currentFrame, addTrack, addItem, setCurrentFrame }}
+    >
       {children}
-    </PPTEditorContext.Provider>
-  )
-};
-
-export const usePPTEditor = () => {
-  const context = useContext(PPTEditorContext);
-  if (!context) throw new Error("usePPTEditor must be used within PPTEditorProvider");
-  return context;
+    </EditorContext.Provider>
+  );
 };
