@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
+    "@remotion/media-utils": "^4.0.321",
     "@remotion/player": "^4.0.321",
     "@workspace/ui": "workspace:*",
     "framer-motion": "^12.20.1",

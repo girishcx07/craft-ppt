@@ -2,7 +2,7 @@ type BaseItem = {
   from: number;
   durationInFrames: number;
   id: string;
-  label?: string
+  label?: string;
 };
 
 export type SolidItem = BaseItem & {
@@ -27,3 +27,8 @@ export type Track = {
   name: string;
   items: Item[];
 };
+
+export interface TimelineInitialState {
+  tracks: Track[];
+  fps: number;
+}
